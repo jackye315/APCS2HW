@@ -59,12 +59,7 @@ public class Maze {
 	else if(solveHelper(x,y+1)){
 	    return true;
 		}
-	else if(solveHelper(x-1,y)){
-	    return true;
-		}
-	else if(solveHelper(x,y-1)){
-	    return true;
-	}
+
 	else{
 	    board[x][y]='.';
 	    return false;

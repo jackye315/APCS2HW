@@ -46,35 +46,12 @@ public class Maze {
     }
 
     public boolean solveHelper( int x, int y ) {
-	if(board[x][y]=='$'){
-	    return true;
-		}
-	if(board[x][y]=='#'){
-	    return false;
-	}
-	board[x][y]='+';
-	if(solveHelper(x+1,y)){
-	    return true;
-	}
-	else if(solveHelper(x,y+1)){
-	    return true;
-		}
-	else if(solveHelper(x-1,y)){
-	    return true;
-		}
-	else if(solveHelper(x,y-1)){
-	    return true;
-	}
-	else{
-	    board[x][y]='.';
-	    return false;
-	}
+	return false;
     }
     
     public static void main(String[] args){
 	Maze m = new Maze();
 	System.out.println(m);
-	m.solve();
-	System.out.println(m);
+
     }
 }

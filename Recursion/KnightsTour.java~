@@ -17,7 +17,14 @@ public class KnightsTour{
 	return ("\033[" + x + ";" + y + "H");
     }
  
- 
+    public void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+    
 
     
     public String toString(){
@@ -82,7 +89,7 @@ public class KnightsTour{
     }
     
     public static void main(String[]args){
-	KnightsTour a = new KnightsTour(1);
+	KnightsTour a = new KnightsTour(Integer.parseInt(args[0]));
 	
 	//System.out.println(a);
 	

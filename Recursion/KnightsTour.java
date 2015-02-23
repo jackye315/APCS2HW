@@ -1,42 +1,38 @@
-import java.util.*;
 import java.io.*;
-
+import java.util.*;
 
 public class KnightsTour{
-    //constants for the class
-    //terminal specific character to clear screen , or hide/show cursor
-    final static String clear =  "\033[2J";
-    final static String hide =  "\033[?25l";
-    final static String show =  "\033[?25h";
-    
-    //instance variable
+    // int size;
+    static final String clear = "\033[2J";
+    static final String hide = "\033[?25l";
+    static final String show = "\033[?25h";
+
     private int[][]board;
     
-    //terminal specific character to move the cursor
     private String go(int x,int y){
-	return ("\033[" + x + ";" + y + "H");
+	return "\033[" + x + ";" + y + "H";
     }
  
  
 
     
     public String toString(){
-	String ans = "\n";
-	//build your knights tour here...
+	String s = "\n";
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
 		int value = board[i][j];
-		if(value < 10){
-		    ans+=" ";
+		if(value < 10 ){
+		    s=s+" ";
 		}
-		if(value < 100){
-		    ans+=" ";
+		if(value <100){
+		    s=s+" ";
 		}
-		ans+=board[i][j];
+	     
+		s=s+board[i][j];
 	    }
-	    ans+="\n";	
+	    s=s+"\n";	
 	}
-	return hide + clear + go(0,0) + ans + "\n" + show;
+	return hide + clear + go(0,0) + s +"\n" + show;
     }
     
     public KnightsTour(int size){
@@ -48,32 +44,38 @@ public class KnightsTour{
 	}	
     }
     
-    
+    public void wait( int ms ) {
+	try {
+	    Thread.sleep( ms );
+	}
+	catch( Exception e ) {}
+    }    
+
     public boolean solve(){
-	return solve(0,0,1);
+	return solveHelper(0,0,1);
     }
 
 		
-    public boolean solve(int x,int y,int currentMoveNumber){
+    public boolean solveHelper(int x,int y,int MoveNumber){
 	//System.out.println(this);
-	//wait(10);
-	if(x < 0 || x >= board.length || y < 0 || y >= board.length){
+	//wait(50);
+	if(x < 0 || x >= board.length || y < 0 || y >= board.length || board.length<6){
 	    return false;
 	}
 	if(board[x][y]==0){
-	    if(currentMoveNumber == board.length*board.length){
-		board[x][y] = currentMoveNumber;
+	    if(MoveNumber == board.length*board.length){
+		board[x][y] = MoveNumber;
 		return true;
 	    }
-	    board[x][y] = currentMoveNumber;
-	    if(solve(x+1,y+2,currentMoveNumber+1) || 
-	       solve(x-1,y+2,currentMoveNumber+1) || 
-	       solve(x+1,y-2,currentMoveNumber+1) ||
-	       solve(x-1,y-2,currentMoveNumber+1) ||
-	       solve(x+2,y+1,currentMoveNumber+1) ||
-	       solve(x-2,y+1,currentMoveNumber+1) ||
-	       solve(x+2,y-1,currentMoveNumber+1) ||
-	       solve(x-2,y-1,currentMoveNumber+1)){
+	    board[x][y] = MoveNumber;
+	    if(solveHelper(x+1,y+2,MoveNumber+1) || 
+	       solveHelper(x-1,y+2,MoveNumber+1) || 
+	       solveHelper(x+1,y-2,MoveNumber+1) ||
+	       solveHelper(x-1,y-2,MoveNumber+1) ||
+	       solveHelper(x+2,y+1,MoveNumber+1) ||
+	       solveHelper(x-2,y+1,MoveNumber+1) ||
+	       solveHelper(x+2,y-1,MoveNumber+1) ||
+	       solveHelper(x-2,y-1,MoveNumber+1)){
 		return true;
 	    }
 	    board[x][y]=0;
@@ -82,9 +84,8 @@ public class KnightsTour{
     }
     
     public static void main(String[]args){
-	KnightsTour a = new KnightsTour(1);
+	KnightsTour a = new KnightsTour(6);
 	
-	//System.out.println(a);
 	
 	if(a.solve()){
 	    System.out.println(a);
@@ -95,3 +96,4 @@ public class KnightsTour{
     }
 
 }
+//Takes really long time to complete anything above 7x7 board

@@ -139,7 +139,7 @@ class TourFinder {
 }//end class TourFinder
 
 
-public class KnightsTour1 {
+public class KnightTour {
 
     public static void main( String[] args ) {
 

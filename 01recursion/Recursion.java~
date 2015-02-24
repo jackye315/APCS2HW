@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Recursion{
 
     public String name(){
@@ -32,6 +34,12 @@ public class Recursion{
 	if(guess
     }
 
+
+    public ArrayList scramble(String s){
+
+
+    }
+	
 public static void main (String [] args){
     Recursion a;
     a=new Recursion();

@@ -84,7 +84,7 @@ public class KnightsTour{
     }
     
     public static void main(String[]args){
-	KnightsTour a = new KnightsTour(6);
+	KnightsTour a = new KnightsTour(8);
 	
 	
 	if(a.solve()){

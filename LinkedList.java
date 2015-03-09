@@ -29,11 +29,36 @@ public class LinkedList {
     }
 
     public void add(char c, int i){
-	while(i>0){
-	    front.getNext()=front;
-	    i=i-1;
+	LNode insert=new LNode(c);
+	LNode nodeNow=front;
+	if(i>=this.size()){
+	    add(c);
+	    return;
 	}
-	front.getNext=new LNode(c);
+	for(int counter=0;nodeNow.getNext()!=null;counter++){
+	    if(counter==1){
+		insert.setNext(nodeNow.getNext());
+		nodeNow.setNext(insert);
+		return;
+	    }
+	    nodeNow=nodeNow.getNext();
+	}
+    }
+
+
+    //or
+
+    public void add1(char c, int i){
+	LNode n=new LNode (c);
+	LNode curr=new LNode(c);
+	//code here;
+
+	while(curr.getNext()!= null && i>1){
+	    curr=curr.getNext();
+	    i--;
+	}
+	n.setNext(curr.getNext());
+	curr.setNext(n);
     }
     public char get(int i){
 	while(i>0){

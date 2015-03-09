@@ -15,7 +15,17 @@ public class LinkedList {
     }
 
     public void add(char c){
-	front.getNext()=new LNode(c);
+	Lnode yay=front;
+	Lnode next=new LNode(c);
+	if(yay==null){
+	    front=next;
+	    return;
+	}
+	while(yay.getNext()!=null){
+	    yay=yay.getNext();
+	    yay.setNext(next);
+	}
+	
     }
 
     public void add(char c, int i){

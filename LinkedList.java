@@ -6,7 +6,12 @@ public class LinkedList {
     }
 
     public String toString(){
-	return ""+front;
+	String s="";
+	while(node!=null){
+	    s=s+node.toString();
+	    node=node.getNext();
+	}
+	return s;
     }
 
     public void add(char c){

@@ -1,103 +1,172 @@
 public class LinkedList {
 
     private LNode front;
-    public LinkedList(LNode node){
-	front=node;
+
+    public LinkedList() {
+	front = null;
     }
 
-    public String toString(){
-	String s="";
-	while(node!=null){
-	    s=s+node.toString();
-	    node=node.getNext();
+    public String toString() {
+	String s = "";
+	LNode curr = front;
+
+	while ( curr != null ) {
+	    s+= curr.getData() + " ";
+	    curr = curr.getNext();
+	}
+	return s;	
+    }
+
+    public void add( char c ) {
+
+	LNode n = new LNode( c );
+	LNode curr = front;
+
+	if ( curr == null )
+	    front = n;
+
+	else {
+	    while ( curr.getNext() != null )
+		curr = curr.getNext();
+	    curr.setNext( n );
+	}
+    }
+
+    public void add( char c, int i ) throws IndexOutOfBoundsException {
+
+	if(i<0 || i>= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	LNode n = new LNode( c );
+	LNode curr = front;
+
+	if ( curr == null ) {
+	    front = n;
+	    return;
+	}
+
+	if ( i == 0 ) {	    
+	    n.setNext( front );
+	    front = n;
+	    return;
+	}
+
+	while ( curr.getNext() != null && i > 1 ) {
+	    curr = curr.getNext();
+	    i--;
+	}
+	
+	n.setNext( curr.getNext() );
+	curr.setNext( n );
+    }
+    
+
+    public char set( char c, int i ) throws IndexOutOfBoundsException {
+	if(i<0 || i>= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	LNode curr = front;
+	char old = 0;
+
+	while ( curr != null &&  i > 0 ) {	    
+	    curr = curr.getNext();
+	    i--;
+	}
+
+	if ( curr != null ) {
+	    old = curr.getData();
+	    curr.setData( c );
+	}	    
+	return old;
+    }
+
+    public char get( int i ) throws IndexOutOfBoundsException {
+	if(i<0 || i>= size()){
+	    throw new IndexOutOfBoundsException(); //Each exception is object
+	}
+	LNode curr = front;
+	
+	while ( curr != null &&  i > 0 ) {	    
+	    curr = curr.getNext();
+	    i--;
+	}
+	if ( curr != null ) {
+	    return curr.getData();
+	}	    
+	return 0;
+    }
+
+    public char remove( int i ) throws IndexOutOfBoundsException {
+	if(i<0 || i>= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	LNode curr = front;
+	char old = 0;
+	
+	if ( curr == null )
+	    return 0;
+
+	if ( i == 0 ) {
+	    front = front.getNext();
+	    return curr.getData();
+	}
+	    
+	while ( curr.getNext() != null && i > 1 ) {
+	    curr = curr.getNext();
+	    i--;	    
+	}
+	
+	old = curr.getNext().getData();
+	curr.setNext( curr.getNext().getNext()  );
+
+	return old;
+    }
+    
+    public int size() {
+
+	LNode curr = front;
+	int s = 0;
+	while ( curr != null ) {
+	    curr = curr.getNext();
+	    s++;
 	}
 	return s;
     }
 
-    public void add(char c){
-	Lnode yay=front;
-	Lnode next=new LNode(c);
-	if(yay==null){
-	    front=next;
-	    return;
-	}
-	while(yay.getNext()!=null){
-	    yay=yay.getNext();
-	    yay.setNext(next);
-	}
+       
+
+    public static void main(String[] args) {
+
+	LinkedList l = new LinkedList();
+
+	for (char c = 'A'; c < 'F'; c++)
+	    l.add(c);
+	
+	System.out.println( l );	
+	
+	l.add( '0', 0 );
+	l.add( '1', 1 );
+	l.add( '2', 3 );
+	l.add( '3', 8 );
+
+	System.out.println( l );	
+
+	l.set( '!', 0 );
+	l.set( '@', 8 );
+
+	System.out.println( l );	
+	
+	System.out.println( l.get(0) );
+	System.out.println( l.get(5) );
+	System.out.println( l.get(9) );
+	
+
+	System.out.println( l.remove(0) );
+	System.out.println( l.remove(5) );
+
+	System.out.println( l );
+	System.out.println( l.size() );
 	
     }
-
-    public void add(char c, int i){
-	LNode insert=new LNode(c);
-	LNode nodeNow=front;
-	if(i>=this.size()){
-	    add(c);
-	    return;
-	}
-	for(int counter=0;nodeNow.getNext()!=null;counter++){
-	    if(counter==1){
-		insert.setNext(nodeNow.getNext());
-		nodeNow.setNext(insert);
-		return;
-	    }
-	    nodeNow=nodeNow.getNext();
-	}
-    }
-
-
-    //or
-
-    public void add1(char c, int i){
-	LNode n=new LNode (c);
-	LNode curr=new LNode(c);
-	//code here;
-
-	while(curr.getNext()!= null && i>1){
-	    curr=curr.getNext();
-	    i--;
-	}
-	n.setNext(curr.getNext());
-	curr.setNext(n);
-    }
-    public char get(int i){
-	while(i>0){
-	    front.getNext=front;
-	    i=i-1;
-	}
-	return front.getData();
-    }
-
-    public void set(char c, int i){
-	while(i>0){
-	    front.getNext=front;
-	    i=i-1;
-	}
-	front.getNext.setData(c);
-    }
-
-    public char remove(int i){
-	while(i>0){
-	    front.Next=front;
-	    i=i-1;
-	}
-	char removed=front.next.getData;
-	front.getNext.getNext=front;
-	return removed;
-    }
-
-    public int size(){
-	int ans=0;
-	while(front.next != null){
-	    ans=ans+1;
-	}
-	return ans;
-    }
-
-public static void main(String[] args) {
-     LinkedList List=new LinkedList(front);
-    System.out.println(List.size());
-
+    
 }
-}
-//I'm confused about how to access the Next node.

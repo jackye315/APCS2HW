@@ -110,17 +110,27 @@ public class Sort {
 	int y=0;
 	int z=0;
 	while(x<sorted.length){
+	    if(y<a.length && z<b.length){
 	    if(a[y]>b[z]){
 		sorted[x]=b[z];
 		z=z+1;
 	    }
-	    if(a[y]<b[z]){
+	    else if(a[y]<b[z]){
 		sorted[x]=a[y];
 		y=y+1;
 	    }
 	    else{
 		sorted[x]=b[z];
 		z=z+1;
+	    }
+	    }
+	    if(a.length<y){
+		sorted[x]=b[z];
+		z=z+1;
+	    }
+	    else if(b.length<z){
+		sorted[x]=a[y];
+		y=y+1;
 	    }
 	    x=x+1;
 	}

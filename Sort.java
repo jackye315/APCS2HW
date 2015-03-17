@@ -124,13 +124,15 @@ public class Sort {
 		z=z+1;
 	    }
 	    }
-	    if(a.length<y){
+	    else{
+	    if(a.length-1<y){
 		sorted[x]=b[z];
 		z=z+1;
 	    }
-	    else if(b.length<z){
+	    if(b.length-1<z){
 		sorted[x]=a[y];
 		y=y+1;
+	    }
 	    }
 	    x=x+1;
 	}

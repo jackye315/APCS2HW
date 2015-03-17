@@ -139,6 +139,9 @@ public class Sort {
      	return sorted;
      }
 
+    public static int[] mergeSort(int[] list){
+int[] a=new int[
+    }
 
     public static void main(String[] args) {
 

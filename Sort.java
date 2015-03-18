@@ -129,7 +129,7 @@ public class Sort {
 		sorted[x]=b[z];
 		z=z+1;
 	    }
-	    if(b.length-1<z){
+	    else if(b.length-1<z){
 		sorted[x]=a[y];
 		y=y+1;
 	    }
@@ -138,13 +138,63 @@ public class Sort {
 	}
      	return sorted;
      }
-
-    public static int[] mergeSort(int[] list){
-int[] a=new int[
+    /*
+    public static int[] merge(int[] a, int[] b){
+	int[] c = new int[a.length+b.length];
+	return merge(a,b,c,0,0,0);
+    
     }
 
-    public static void main(String[] args) {
+    
+    public static int[] merge(int[] a, int[] b, int[] c, int acount, int bcount, int ccount){
+	if(ccount == c.length){
+	    return c;
+	}
+	if(acount == a.length){
+	    for(int i = 0; i < b.length - bcount; i++){
+		c[ccount+i] = b[bcount+i];
+	    }
+	    return c;
+	}
+	if(bcount == b.length){
+	    for(int i = 0; i < a.length - acount; i++){
+		c[ccount+i] = a[acount+i];
+	    }
+	    return c;
+	}
+	if(a[acount] > b[bcount]){
+	    c[ccount] = b[bcount];
+	    return merge(a,b,c,acount,bcount+1,ccount+1);
+	}else{
+	    c[ccount] = a[acount];
+	    return merge(a,b,c,acount+1,bcount,ccount+1);
 
+	}
+	
+    }
+    */
+ public static int[] merges(int[]array){
+	if(array.length == 0 || array.length == 1){
+	    return array;
+	}
+	int[] a = new int[array.length/2];
+	int[] b = new int[array.length - array.length/2];
+	System.arraycopy(array,0,a,0,array.length/2);
+	System.arraycopy(array,array.length/2,b,0,array.length - array.length/2);
+	return merge(merges(a),merges(b));
+
+    }
+
+public static void mergeSort(int[] array){
+	int[] copy = new int[array.length];
+	copy = merges(array);
+	for(int i = 0; i < copy.length; i++){
+	    array[i] = copy[i];
+	}
+    }   
+
+    public static void main(String[] args) {
+	
 	int[] a1 = new int[10];
 	int[] a2 = new int[10];
 
@@ -158,5 +208,13 @@ int[] a=new int[
 	int[] merged = merge( a1, a2 );
 	System.out.println( show( merged ) );
 	
+	int[]a3=new int [10];
+	populate(a3);
+	System.out.println(show(a3));
+	mergeSort(a3);
+	System.out.println(show(a3));
+	
     }
 }
+
+//Also fixed the first merge

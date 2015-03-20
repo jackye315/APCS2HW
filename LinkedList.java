@@ -133,40 +133,56 @@ public class LinkedList {
 	return s;
     }
 
+    public void transferNodesFromEnd(LinkedList other, int num){
+
+	if(num>other.size()){
+	    while(other.size()-num > 0){
+		other.front=other.front.getNext();
+	    }
+	    while(num>0){
+		add(other.remove(other.size()-num));
+		num=num-1;
+	    }
+	}
+    }
        
 
     public static void main(String[] args) {
 
 	LinkedList l = new LinkedList();
-
-	for (char c = 'A'; c < 'F'; c++)
+	LinkedList s = new LinkedList();
+	for (char c = 'A'; c < 'F'; c++){
 	    l.add(c);
-	
+	    s.add(c);
+	}
 	System.out.println( l );	
 	
 	l.add( '0', 0 );
 	l.add( '1', 1 );
 	l.add( '2', 3 );
-	l.add( '3', 8 );
+	l.add( '3', 4 );
 
 	System.out.println( l );	
-
+	/*
 	l.set( '!', 0 );
-	l.set( '@', 8 );
+	//l.set( '@', 8 );
 
 	System.out.println( l );	
 	
 	System.out.println( l.get(0) );
 	System.out.println( l.get(5) );
-	System.out.println( l.get(9) );
+	//System.out.println( l.get(3) );
 	
 
 	System.out.println( l.remove(0) );
-	System.out.println( l.remove(5) );
+	//System.out.println( l.remove(5) );
 
 	System.out.println( l );
 	System.out.println( l.size() );
-	
+	*/
+	l.transferNodesFromEnd(s,3);
+	System.out.println(l);
+	System.out.println(s);
     }
     
 }

@@ -1,4 +1,4 @@
-public class LinkedList {
+public class LinkedList <E> {
 
     private LNode front;
 
@@ -8,7 +8,7 @@ public class LinkedList {
 
     public String toString() {
 	String s = "";
-	LNode curr = front;
+	LNode<E> curr = front;
 
 	while ( curr != null ) {
 	    s+= curr.getData() + " ";
@@ -17,10 +17,10 @@ public class LinkedList {
 	return s;	
     }
 
-    public void add( char c ) {
+    public void add( E c ) {
 
-	LNode n = new LNode( c );
-	LNode curr = front;
+	LNode<E> n = new LNode<E>( c );
+	LNode<E> curr = front;
 
 	if ( curr == null )
 	    front = n;
@@ -32,13 +32,13 @@ public class LinkedList {
 	}
     }
 
-    public void add( char c, int i ) throws IndexOutOfBoundsException {
+    public void add( E c, int i ) throws IndexOutOfBoundsException {
 
 	if(i<0 || i>= size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode n = new LNode( c );
-	LNode curr = front;
+	LNode<E> n = new LNode<E>( c );
+	LNode<E> curr = front;
 
 	if ( curr == null ) {
 	    front = n;
@@ -61,12 +61,12 @@ public class LinkedList {
     }
     
 
-    public char set( char c, int i ) throws IndexOutOfBoundsException {
+    public E set( E c, int i ) throws IndexOutOfBoundsException {
 	if(i<0 || i>= size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode curr = front;
-	char old = 0;
+	LNode<E> curr = front;
+	E old = 0;
 
 	while ( curr != null &&  i > 0 ) {	    
 	    curr = curr.getNext();
@@ -80,11 +80,11 @@ public class LinkedList {
 	return old;
     }
 
-    public char get( int i ) throws IndexOutOfBoundsException {
+    public E get( int i ) throws IndexOutOfBoundsException {
 	if(i<0 || i>= size()){
 	    throw new IndexOutOfBoundsException(); //Each exception is object
 	}
-	LNode curr = front;
+	LNode<E> curr = front;
 	
 	while ( curr != null &&  i > 0 ) {	    
 	    curr = curr.getNext();
@@ -96,12 +96,12 @@ public class LinkedList {
 	return 0;
     }
 
-    public char remove( int i ) throws IndexOutOfBoundsException {
+    public E remove( int i ) throws IndexOutOfBoundsException {
 	if(i<0 || i>= size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode curr = front;
-	char old = 0;
+	LNode<E> curr = front;
+	E old = 0;
 	
 	if ( curr == null )
 	    return 0;
@@ -124,7 +124,7 @@ public class LinkedList {
     
     public int size() {
 
-	LNode curr = front;
+	LNode<E> curr = front;
 	int s = 0;
 	while ( curr != null ) {
 	    curr = curr.getNext();
@@ -133,56 +133,42 @@ public class LinkedList {
 	return s;
     }
 
-    public void transferNodesFromEnd(LinkedList other, int num){
-
-	if(num>other.size()){
-	    while(other.size()-num > 0){
-		other.front=other.front.getNext();
-	    }
-	    while(num>0){
-		add(other.remove(other.size()-num));
-		num=num-1;
-	    }
-	}
-    }
        
 
     public static void main(String[] args) {
 
-	LinkedList l = new LinkedList();
-	LinkedList s = new LinkedList();
-	for (char c = 'A'; c < 'F'; c++){
+	LinkedList<Character> l = new LinkedList<Character>();
+
+	for (char c = 'A'; c < 'F'; c++)
 	    l.add(c);
-	    s.add(c);
-	}
+	
 	System.out.println( l );	
 	
 	l.add( '0', 0 );
 	l.add( '1', 1 );
 	l.add( '2', 3 );
-	l.add( '3', 4 );
+	l.add( '3', 8 );
 
 	System.out.println( l );	
-	/*
+
 	l.set( '!', 0 );
-	//l.set( '@', 8 );
+	l.set( '@', 8 );
 
 	System.out.println( l );	
 	
 	System.out.println( l.get(0) );
 	System.out.println( l.get(5) );
-	//System.out.println( l.get(3) );
+	System.out.println( l.get(9) );
 	
 
 	System.out.println( l.remove(0) );
-	//System.out.println( l.remove(5) );
+	System.out.println( l.remove(5) );
 
 	System.out.println( l );
 	System.out.println( l.size() );
-	*/
-	l.transferNodesFromEnd(s,3);
-	System.out.println(l);
-	System.out.println(s);
+	
     }
     
 }
+
+

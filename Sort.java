@@ -199,13 +199,16 @@ private static Random r = new Random();
 	    //	end=end-1;
 	    // }
 	    
-
 	}
-	return a[start];	    
+	return end;	    
     }
     
 
-
+    public static void quickSort(int[]){
+	while(a.length>0){
+	    //
+	}
+    }
     
     public static void main(String[] args) {
 

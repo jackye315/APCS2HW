@@ -180,13 +180,15 @@ private static Random r = new Random();
 	    if(pivot>a[start]){
 		start=start+1;
 	    }
+	    if(pivot<a[end]){
+		  end=end-1;
+	    }
+
 	    else if(pivot<=a[start]){
 		swap(start,end,a);
 		end=end-1;		
 	    }
-	    if(pivot<a[end]){
-		  end=end-1;
-	    }
+	    
 	    /*
 	    else  if(pivot>a[end]){
 	    	swap(start,end,a);
@@ -202,26 +204,30 @@ private static Random r = new Random();
 	}
 	return end;	    
     }
-    
 
-    public static void quickSort(int[]){
-	while(a.length>0){
-	    //
+    public static void quickSort(int[] list, int start, int end){
+	if(start<end){
+	    int mid=partition(list,start,end);
+	    quickSort(list, start,mid-1);
+	    quickSort(list,mid+1,end);
 	}
+
     }
     
     public static void main(String[] args) {
 
 	//Testing mergeSort
 	
-	int[] a1 = new int[10];
+	int[] a1 = new int[5];
       	//int[] a2 = new int[10];
 
 	populate(a1);
 	//populate(a2);
 	System.out.println(show(a1));
-	System.out.println(partition(a1,0,9));
+	System.out.println(partition(a1,0,4));
 	//swap(0,9,a1);
+	System.out.println(show(a1));
+	quickSort(a1,0,4);
 	System.out.println(show(a1));
 	/*
 	insertionSort(a1);

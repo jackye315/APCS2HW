@@ -1,0 +1,24 @@
+public class TreeNode <E> {
+    
+    private E data;
+    private TreeNode<E> left;
+    private TreeNode<E> right;
+    public TreeNode ( E d ) {
+	data = d;
+    }
+    public String toString() {
+	return "" + data;
+    }
+    public void setData( E c ) {
+	data = c;
+    }
+    public void setNext( TreeNode<E> n ) {
+	next = n;
+    }
+    public E getData() {
+	return data;
+    }
+    public TreeNode<E> getNext() {
+	return next;
+    }    
+}

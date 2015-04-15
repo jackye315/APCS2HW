@@ -174,81 +174,60 @@ private static Random r = new Random();
               
       This method must run in linear time.      
       ====================*/
-    public static int partition1(int[] a, int start, int end) {
-	int pivot=a[0];
+    public static int partition(int[] a, int start, int end) {
+	int pivot=a[0];//not sure how to select pivot besides just first element
 	while(end>start){
 	    if(pivot>a[start]){
 		start=start+1;
 	    }
 	    if(pivot<a[end]){
-		end=end-1;
+		  end=end-1;
+	    }
+
+	    else if(pivot<=a[start]){
+		swap(start,end,a);
+		end=end-1;		
 	    }
 	    
-	    if(a[end]<pivot && a[start]>pivot){
-		//swap(start,end,a);
+	    /*
+	    else  if(pivot>a[end]){
+	    	swap(start,end,a);
 		start=start+1;
-		end=end-1;
 	    }
+	    */
+	    //if(a[end]<pivot && a[start]>=pivot){
+	    //	swap(start,end,a);
+	    //	start=start+1;
+	    //	end=end-1;
+	    // }
 	    
-
 	}
-	return -1;	    
-    }
-    
-     public static int partition(int[] ary, int si, int ei){
-	int pi = si + r.nextInt(ei-si+1);
-	int pivot = ary[pi];
-
-	//System.out.println(pi);
-	//System.out.println(pivot);
-
-	ary[pi] = ary[ei];
-	ary[ei] = pivot;
-
-	int s = si;
-	int e = ei-1;
-	int temp;
-
-	//System.out.println(Arrays.toString(ary));
-
-	while(s <= e){
-	    if(ary[s] < pivot){
-		s++;
-	    }else if(ary[s] > pivot){
-		temp = ary[s];
-		ary[s] = ary[e];
-		ary[e] = temp;
-		e--;
-	    }else if(ary[s] == pivot){
-		temp = ary[s];
-		ary[s] = ary[s+1];
-		ary[s+1] = temp;
-		if(ary[s] == pivot){
-		    s++;
-		}
-	    }
-	}
-      
-	ary[ei] = ary[s];
-        ary[s] = pivot;   
-
-	//System.out.println(Arrays.toString(ary));
-
-	return s;
+	return end;	    
     }
 
+    public static void quickSort(int[] list, int start, int end){
+	if(start<end){
+	    int mid=partition(list,start,end);
+	    quickSort(list, start,mid-1);
+	    quickSort(list,mid+1,end);
+	}
+
+    }
     
     public static void main(String[] args) {
 
 	//Testing mergeSort
 	
-	int[] a1 = new int[10];
+	int[] a1 = new int[5];
       	//int[] a2 = new int[10];
 
 	populate(a1);
 	//populate(a2);
 	System.out.println(show(a1));
-	System.out.println(partition(a1,0,9));
+	System.out.println(partition(a1,0,4));
+	//swap(0,9,a1);
+	System.out.println(show(a1));
+	quickSort(a1,0,4);
 	System.out.println(show(a1));
 	/*
 	insertionSort(a1);

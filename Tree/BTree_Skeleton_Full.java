@@ -69,6 +69,14 @@ public class BTree<E> {
       pre-order Traversal
       ====================*/
     public void preOrder( TreeNode<E> curr ) {
+	if(curr.getData()==null){
+	    return;
+	}
+	E ans;
+	ans=ans+curr.getData();
+	preOrder(curr.getLeft());
+	preOrder(curr.getRight());
+	System.out.println(ans);
     }
 
 
@@ -80,6 +88,14 @@ public class BTree<E> {
       in-order Traversal
       ====================*/
     public void inOrder( TreeNode<E> curr ) {
+	if(curr.getData()==null){
+	    return;
+	}
+	E ans;
+	inOrder(curr.getLeft());
+        ans=ans+curr.getData();
+	inOrder(curr.getRight());
+	System.out.println(ans);
     }
 
     /*======== public void postOrder() ==========
@@ -93,6 +109,14 @@ public class BTree<E> {
       jdyrlandweaver
       ====================*/
     public void postOrder( TreeNode<E> curr ) {
+	if(curr.getData()==null){
+	    return;
+	}
+	E ans;
+	postOrder(curr.getLeft());
+	postOrder(curr.getRight());
+        ans=ans+curr.getData();
+	System.out.println(ans);
     }
     
 
@@ -116,7 +140,14 @@ public class BTree<E> {
 	    return 1;
 	}
 	else{
-
+	    int lheight=getHeight(curr.getLeft());
+	    int rheight=getHeight(curr.getRight());
+	    if(lheight>rheight){
+		return lheight;
+	    }
+	    else{
+		return rheight;
+	    }
 	}
 	return -1;
     }
@@ -130,6 +161,17 @@ public class BTree<E> {
       
       ====================*/
     public String getLevel( TreeNode<E> curr, int level, int currLevel ) {
+        if(curr.getData=null){
+	    return "";
+	}
+	else if(level==0){
+	    return ""+curr.getData;
+	}
+	else{
+	    getLevel(curr.getLeft(),level-1,currLevel);
+	    getLevel(curr.getRight(),level-1,currLevel);
+	}
+
 	return "";
     }
     
@@ -156,7 +198,15 @@ public class BTree<E> {
       jdyrlandweaver
       ====================*/
     public String toString() {
-	return "";
+	int h=getHeight(root);
+	int level=0;
+	String ans;
+	while(level<h){
+	    ans=ans+getLevel((root),level,0)+"\n";
+	    level=level+1;
+
+	}
+	return ans;
     }
 	
 

@@ -112,6 +112,12 @@ public class BTree<E> {
       
       ====================*/
     public int getHeight( TreeNode<E> curr ) {
+        if (curr.getRight==null && curr.getLeft==null){
+	    return 1;
+	}
+	else{
+
+	}
 	return -1;
     }
 

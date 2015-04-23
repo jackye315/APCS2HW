@@ -77,14 +77,28 @@ public class BSTree <T extends Comparable> {
     public BSTreeNode<T> remove( BSTreeNode<T> curr, T c ) {
 	while(curr.getLeft!=null && curr.getRight!=null){
 	    if(curr.getData.compareTo(c)<0){
-		if(curr.getRight.compareTo(c)==0){
-		    curr.setRight(c);
+		if(curr.getRight().compareTo(c)==0){
+		    BSTreeNode r=curr.getRight();
+		    if(r.getRight()==null && r.getLeft()==null){
+			r.setData(null);
+		    }else{
+			T temp=r.getRight().getLeft();
+			r.setData(temp);
+		    }
+
 		}
 		
 	    }
 	    if(curr.getData.compareTo(c)>0){
 		if(curr.getLeft.compareTo(c)==0){
-		    curr.setLeft(c);
+		     BSTreeNode l=curr.getLeft();
+		    if(l.getLeft()==null && l.getRight()==null){
+			l.setData(null);
+		    }else{
+			T temp=l.getRight().getLeft();
+			l.setData(temp);
+		    }
+
 		}
 	    }
 	}
